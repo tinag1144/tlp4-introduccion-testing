@@ -3,14 +3,34 @@ import { calcularPrecioFinal } from '../src/services/precios.ts';
 
 describe('calcularPrecioFinal', () => {
   it('aplica un descuento del 10 %', () => {
-    expect(calcularPrecioFinal(1000, 10)).toBe(900);
+    expect(calcularPrecioFinal(1000, 10)).toBe(900);//espera que el resultado sea 900
   });
 
   it('conserva el precio si el descuento es cero', () => {
-    expect(calcularPrecioFinal(1000, 0)).toBe(1000);
+    expect(calcularPrecioFinal(1000, 0)).toBe(1000); //espera que el resultado sea 1000
   });
 
   it('rechaza descuentos superiores al 100 %', () => {
-    expect(() => calcularPrecioFinal(1000, 150)).toThrow(RangeError);
+    expect(() => calcularPrecioFinal(1000, 150)).toThrow(RangeError); //acá espera que el programa lance un error 
   });
+
+
+//prueba 6
+  it('devuelve cero con un descuento del 100 %', () => {
+  expect(calcularPrecioFinal(1000, 100)).toBe(0); 
+})
+//prueba 7 
+  it('rechaza precios negativos', () => {
+    expect(() => calcularPrecioFinal(-100, 10)).toThrow(RangeError)
+  })
+
+  //prueba 8
+  it('rechaza descuentos negativos',() => {
+    expect(()=> calcularPrecioFinal(1000, -10)).toThrow(RangeError)
+  })
+
+  // prueba adicional 
+  it('rechaza NaN como precio', () => {
+    expect(() => calcularPrecioFinal(NaN, 10)).toThrow(RangeError)
+  })
 });
